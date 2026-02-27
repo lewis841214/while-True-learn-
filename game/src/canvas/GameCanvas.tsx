@@ -93,6 +93,9 @@ export function GameCanvas({ initialNodes = [], initialEdges = [] }: Props) {
   // Must return `prev` unchanged when nothing meaningful differs, otherwise
   // React Flow's setState would trigger Effect 2, creating a loop.
   useEffect(() => {
+    // Check if we need to add new nodes BEFORE calling setNodes
+    const shouldAddNewNodes = storeNodes.length > lastStoreCountRef.current
+    
     setNodes(prev => {
       const prevIds = new Set(prev.map(n => n.id))
       let changed = false
@@ -110,18 +113,19 @@ export function GameCanvas({ initialNodes = [], initialEdges = [] }: Props) {
 
       // (a) Only inject truly NEW nodes (toolbar adds).  Ignore store nodes
       //     left over from a previous level that haven't been cleaned up yet.
-      if (storeNodes.length > lastStoreCountRef.current) {
+      if (shouldAddNewNodes) {
         const newRFNodes = storeNodes.filter(s => !prevIds.has(s.id)).map(toRFNode)
         if (newRFNodes.length > 0) {
           changed = true
-          lastStoreCountRef.current = storeNodes.length
           return [...updated, ...newRFNodes]
         }
       }
-      lastStoreCountRef.current = storeNodes.length
 
       return changed ? [...updated] : prev
     })
+    
+    // Update the ref AFTER setNodes to avoid race conditions
+    lastStoreCountRef.current = storeNodes.length
   }, [storeNodes, setNodes])
 
   // Effect 2: RF → Store  (positions + deletions)
