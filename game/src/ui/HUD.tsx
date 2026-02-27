@@ -8,12 +8,20 @@ import { Sparkline } from './MetricsChart'
 const PRIMER_BASE = 'https://github.com/donnemartin/system-design-primer'
 
 const PRIMER_ANCHORS: Record<string, string> = {
-  'System design topics: start here': '#system-design-topics-start-here',
-  'Database':                          '#database',
-  'Cache':                             '#cache',
-  'Load balancer':                     '#load-balancer',
-  'Availability':                      '#availability-vs-consistency',
-  'Asynchronous workflows':            '#asynchronous-workflows',
+  'System design topics: start here':  '#system-design-topics-start-here',
+  'Database':                           '#database',
+  'Cache':                              '#cache',
+  'Load balancer':                      '#load-balancer',
+  'Availability':                       '#availability-vs-consistency',
+  'Asynchronous workflows':             '#asynchronous-workflows',
+  'NoSQL databases':                    '#nosql',
+  'Sharding':                           '#sharding',
+  'Replication':                        '#replication',
+  'Rate limiting':                      '#rate-limiting',
+  'Content delivery network':           '#content-delivery-network',
+  'Multi-region architecture':          '#federation',
+  'Design a URL shortening service like bit.ly': '#design-a-url-shortening-service-like-bitly',
+  'Design a social media site like Twitter':     '#design-twitter',
 }
 
 function primerUrl(ref: string): string {

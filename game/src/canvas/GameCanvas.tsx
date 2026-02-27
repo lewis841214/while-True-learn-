@@ -200,18 +200,26 @@ export function GameCanvas({ initialNodes = [], initialEdges = [] }: Props) {
 // ─── Toolbar / component palette ─────────────────────────────────────────────
 
 const PALETTE_ITEMS: Array<{ type: NodeType; tier: Tier; label: string; cost: number }> = [
-  { type: 'web_server',    tier: 'small',  label: 'Web Server (S)',   cost: 50 },
+  { type: 'web_server',    tier: 'small',  label: 'Web Server (S)',   cost: 50  },
   { type: 'web_server',    tier: 'medium', label: 'Web Server (M)',   cost: 150 },
+  { type: 'web_server',    tier: 'large',  label: 'Web Server (L)',   cost: 300 },
   { type: 'sql_db',        tier: 'small',  label: 'SQL DB (S)',       cost: 100 },
   { type: 'sql_db',        tier: 'medium', label: 'SQL DB (M)',       cost: 300 },
-  { type: 'cache',         tier: 'small',  label: 'Cache (1 GB)',     cost: 30 },
+  { type: 'nosql_db',      tier: 'small',  label: 'NoSQL DB (S)',     cost: 80  },
+  { type: 'nosql_db',      tier: 'medium', label: 'NoSQL DB (M)',     cost: 200 },
+  { type: 'nosql_db',      tier: 'large',  label: 'NoSQL DB (L)',     cost: 600 },
+  { type: 'cache',         tier: 'small',  label: 'Cache (1 GB)',     cost: 30  },
   { type: 'cache',         tier: 'medium', label: 'Cache (8 GB)',     cost: 100 },
-  { type: 'load_balancer', tier: 'small',  label: 'Load Balancer',    cost: 20 },
-  { type: 'message_queue', tier: 'small',  label: 'Queue (S)',        cost: 30 },
-  { type: 'message_queue', tier: 'medium', label: 'Queue (M)',        cost: 80 },
-  { type: 'worker',        tier: 'small',  label: 'Worker (S)',       cost: 50 },
+  { type: 'cache',         tier: 'large',  label: 'Cache (64 GB)',    cost: 200 },
+  { type: 'cdn',           tier: 'small',  label: 'CDN (S)',          cost: 20  },
+  { type: 'cdn',           tier: 'medium', label: 'CDN (M)',          cost: 60  },
+  { type: 'load_balancer', tier: 'small',  label: 'Load Balancer',    cost: 50  },
+  { type: 'message_queue', tier: 'small',  label: 'Queue (S)',        cost: 30  },
+  { type: 'message_queue', tier: 'medium', label: 'Queue (M)',        cost: 80  },
+  { type: 'worker',        tier: 'small',  label: 'Worker (S)',       cost: 50  },
   { type: 'worker',        tier: 'medium', label: 'Worker (M)',       cost: 150 },
-  { type: 'rate_limiter',  tier: 'small',  label: 'Rate Limiter',     cost: 10 },
+  { type: 'worker',        tier: 'large',  label: 'Worker (L)',       cost: 400 },
+  { type: 'rate_limiter',  tier: 'small',  label: 'Rate Limiter',     cost: 10  },
 ]
 
 export function Toolbar() {

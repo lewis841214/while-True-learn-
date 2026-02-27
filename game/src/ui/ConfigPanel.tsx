@@ -6,25 +6,38 @@ import type { NodeConfig, Tier } from '../engine/types'
 const TIER_COSTS: Partial<Record<string, [number, number, number]>> = {
   web_server:     [50,  150, 400],
   sql_db:         [100, 300, 800],
-  load_balancer:  [20,  60,  150],
-  cache:          [30,  100, 300],
+  nosql_db:       [80,  200, 600],
+  load_balancer:  [50,  100, 250],
+  cache:          [30,  100, 200],
+  cdn:            [20,  60,  200],
   message_queue:  [30,  80,  200],
   worker:         [50,  150, 400],
+  rate_limiter:   [10,  30,  80],
 }
 
 const TIER_SPECS: Partial<Record<string, Array<{ label: string; values: [string, string, string] }>>> = {
-  web_server:    [{ label: 'Capacity',   values: ['500 RPS',   '2,000 RPS',   '8,000 RPS'] }],
+  web_server:    [{ label: 'Capacity',    values: ['500 RPS',      '2,000 RPS',     '8,000 RPS']  }],
   sql_db:        [
-    { label: 'Read cap',  values: ['2,000 RPS',  '10,000 RPS',  '50,000 RPS'] },
-    { label: 'Write cap', values: ['500 RPS',    '2,000 RPS',   '10,000 RPS'] },
+    { label: 'Read cap',   values: ['2,000 RPS',    '10,000 RPS',    '50,000 RPS']  },
+    { label: 'Write cap',  values: ['500 RPS',      '2,000 RPS',     '10,000 RPS']  },
   ],
-  load_balancer: [{ label: 'Capacity',   values: ['1,000 RPS', '10,000 RPS', '100,000 RPS'] }],
-  cache:         [{ label: 'Memory',     values: ['1 GB',      '8 GB',       '64 GB'] }],
+  nosql_db:      [
+    { label: 'Capacity',   values: ['5,000 RPS',    '25,000 RPS',    '100,000 RPS'] },
+    { label: 'Latency',    values: ['15ms',         '8ms',           '5ms']         },
+  ],
+  load_balancer: [{ label: 'Capacity',    values: ['1,000 RPS',    '10,000 RPS',    '100,000 RPS'] }],
+  cache:         [{ label: 'Memory',      values: ['1 GB',         '8 GB',          '64 GB']      }],
+  cdn:           [
+    { label: 'Capacity',   values: ['50,000 RPS',   '500,000 RPS',   '5,000,000 RPS'] },
+    { label: 'Hit rate',   values: ['80%',          '90%',           '95%']           },
+    { label: 'Latency',    values: ['5ms (edge)',   '3ms (edge)',    '2ms (edge)']    },
+  ],
   message_queue: [
-    { label: 'Throughput', values: ['200 RPS',  '500 RPS',  '2,000 RPS'] },
-    { label: 'Buffer',     values: ['20k items', '100k items', '500k items'] },
+    { label: 'Throughput', values: ['200 RPS',      '500 RPS',       '2,000 RPS']   },
+    { label: 'Buffer',     values: ['20k items',    '100k items',    '500k items']  },
   ],
-  worker:        [{ label: 'Capacity',   values: ['300 RPS',   '1,000 RPS',  '5,000 RPS'] }],
+  worker:        [{ label: 'Capacity',    values: ['300 RPS',      '1,000 RPS',     '5,000 RPS']  }],
+  rate_limiter:  [{ label: 'Rate limit',  values: ['1,000 RPS',    '10,000 RPS',    '100,000 RPS'] }],
 }
 
 const LB_ALGORITHMS: Array<{ id: string; label: string }> = [

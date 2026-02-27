@@ -7,6 +7,8 @@ import { LoadBalancer } from './nodes/LoadBalancer'
 import { RateLimiter } from './nodes/RateLimiter'
 import { MessageQueue } from './nodes/MessageQueue'
 import { Worker } from './nodes/Worker'
+import { NoSqlDatabase } from './nodes/NoSqlDatabase'
+import { CdnNode } from './nodes/CdnNode'
 import type {
   AnimationEvent,
   GlobalMetrics,
@@ -389,6 +391,12 @@ export class SimulationEngine {
         return new MessageQueue(cfg)
       case 'worker':
         return new Worker(cfg)
+      case 'nosql_db':
+        return new NoSqlDatabase(cfg)
+      case 'cdn': {
+        const cdn = new CdnNode(cfg)
+        return cdn
+      }
       default:
         return new WebServer({ ...cfg, type: 'web_server' })
     }

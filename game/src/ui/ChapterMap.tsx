@@ -21,6 +21,11 @@ const CHAPTER_COLORS: Record<string, string> = {
   '1': '#22c55e',
   '2': '#f59e0b',
   '3': '#ec4899',
+  '4': '#06b6d4',
+  '5': '#a78bfa',
+  '6': '#34d399',
+  '7': '#fb923c',
+  '8': '#f43f5e',
 }
 
 export function ChapterMap({ levels, activeId, onSelect, onClose }: Props) {
